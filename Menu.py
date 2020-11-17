@@ -4,25 +4,37 @@ Clean = lambda: Packages.os.system('cls')
 Clean()
 
 def Menu():
+    Clean()
     print("=SISTEMA DE CONTABILIDAD FACPYA=")
     print("=    PRESUPUESTO MAESTRO       =")
     print()
     print("1.-Presupuesto de Operación")
     print("2.-Presupuesto Financiero")
     print()
+    print("0.-Salir")
+    print()
     CtlMenu = int(input("Ingrese la opcion a realizar: "))
-    
-    if CtlMenu == 0:
-        print("saliendo del sistema...")
-    elif CtlMenu == 1:
-        Packages.Operation_Budget()
-    elif CtlMenu == 2:
-        Packages.Financial_Budget()
-    else:
-        print("Opción seleccionada no valida...")
-        input("presiona la tecla Enter para continuar")
+
+    if (str(CtlMenu) == ""):
+        print("ERROR: POR FAVOR SELECCIONA UNA OPCIÓN")
+        input("Presiona la tecla ENTER para continuar...")
         Clean()
         Menu()
+    elif (CtlMenu == 1):
+        Clean()
+        Operation_Budget()
+    elif (CtlMenu == 2):
+        Clean()
+        Financial_Budget()
+    elif (CtlMenu == 0):
+        print("Saliendo del sistema...")
+        Packages.sys.exit()
+    else:
+        print("ERROR: VALOR INGRESADO NO VALIDO")
+        input("Presiona la tecla ENTER para continuar...")
+        Clean()
+        Menu()
+        
 
 def Operation_Budget():
     CtlOB = 1
@@ -44,43 +56,58 @@ def Operation_Budget():
         print()
         print("0.-Regresar al menu principal")
         print()
-        CtlOB = int(input("Ingrese la opcion a realizar: "))
+        CtlOB = input("Ingrese la opcion a realizar: ")
 
-        if (CtlOB == 0):
+        if (CtlOB == ""):
+            print("Por favor selecciona una opción")
+            input("presiona la tecla Enter para continuar")
+            Clean()
+        elif (int(CtlOB) == 0):
             Clean()
             Menu()
-        elif(CtlOB == 1):
-            print("1")
+        elif(int(CtlOB) == 1):
             Clean()
-        elif(CtlOB == 2):
-            print("2")
+            Packages.Sales_Budget()
             Clean()
-        elif(CtlOB == 3):
-            print("3")
+        elif(int(CtlOB) == 2):
             Clean()
-        elif(CtlOB == 4):
-            print("4")
+            Packages.DCBI()
             Clean()
-        elif(CtlOB == 5):
-            print("5")
+        elif(int(CtlOB) == 3):
             Clean()
-        elif(CtlOB == 6):
-            print("6")
+            Packages.Production_Budget()
             Clean()
-        elif(CtlOB == 7):
-            print("7")
+        elif(int(CtlOB) == 4):
             Clean()
-        elif(CtlOB == 8):
-            print("8")
+            Packages.Materials_Requirement_Budget()
             Clean()
-        elif(CtlOB == 9):
-            print("9")
+        elif(int(CtlOB) == 5):
             Clean()
-        elif(CtlOB == 10):
-            print("10")
+            Packages.Materials_Purchase_Budget()
             Clean()
-        elif(CtlOB == 11):
-            print("11")
+        elif(int(CtlOB) == 6):
+            Clean()
+            Packages.DBSO()
+            Clean()
+        elif(int(CtlOB) == 7):
+            Clean()
+            Packages.Direct_Labor_Budget()
+            Clean()
+        elif(int(CtlOB) == 8):
+            Clean()
+            Packages.IMEB()
+            Clean()
+        elif(int(CtlOB) == 9):
+            Clean()
+            Packages.Operating_Expenses_Budget
+            Clean()
+        elif(int(CtlOB) == 10):
+            Clean()
+            Packages.DUCFP
+            Clean()
+        elif(int(CtlOB) == 11):
+            Clean()
+            Packages.Final_Inventory_Valuation()
             Clean()
         else:
             print("Valor seleccionado no valido")
@@ -100,22 +127,30 @@ def Financial_Budget():
         print()
         print("0.-Regresar al menu principal")
         print()
-        CtlFB = int(input("Ingrese la opcion a realizar: "))
+        CtlFB = input("Ingrese la opcion a realizar: ")
 
-        if CtlFB == 0:
+        if (CtlFB == ""):
+            print("Por favor selecciona una opción")
+            input("presiona la tecla Enter para continuar")
+            Clean()
+        elif int(CtlFB) == 0:
             Clean()
             Menu()
-        elif CtlFB == 1:
-            print("1")
+        elif int(CtlFB) == 1:
             Clean()
-        elif CtlFB == 2:
-            print("2")
+            Packages.SCPS()
             Clean()
-        elif CtlFB == 3:
-            print("3")
+        elif int(CtlFB) == 2:
             Clean()
-        elif CtlFB == 4:
-            print("4")
+            Packages.Statement_Income()
+            Clean()
+        elif int(CtlFB) == 3:
+            Clean()
+            Packages.Cash_Flow_Statement()
+            Clean()
+        elif int(CtlFB) == 4:
+            Clean()
+            Packages.Balance_Sheet()
             Clean()
         else:
             print("Valor seleccionado no valido")

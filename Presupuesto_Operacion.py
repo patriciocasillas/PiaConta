@@ -1,8 +1,9 @@
 mtzArticulos = []
 mtzPVenta = []
-dicArticulos = dict(CodArticulo="", NomArticulos= "")
-dicPVenta = dict(CodArticulo = "", UnAVender = 0, Pventa = 0, Semestre = 0)
 lstValArticulo = []
+lstTotalVS = []
+dicArticulos = dict(CodArticulo="", NomArticulos= "")
+dicPVenta = dict(CodArticulo = "", UnAVender = 0, Pventa = 0, Semestre = 0, ImporteVenta = 0)
 
 dicArticulos["CodArticulo"] = "1"
 dicArticulos["NomArticulo"] = "CL"
@@ -36,15 +37,21 @@ def Sales_Budget():
 
             if(Opcion3 in lstValArticulo):
                 for Cont in range(0, 2):
+                    TotalVentas = 0
                     for Campo in dicPVenta:
                         if (Campo == "CodArticulo"):
                             dicPVenta[Campo] = Opcion3
                         elif (Campo == "Semestre"):
                             dicPVenta[Campo] = (Cont + 1)
-                        else:
+                        elif (Campo == "UnAVender" or Campo == "Pventa"):
                             dicPVenta[Campo] = float(input("Ingresa la cantidad de " + Campo + " para el " + str(Cont + 1)  + "° semestre: "))
+                        else:
+                            dicPVenta[Campo] = dicPVenta["UnAVender"] * dicPVenta["Pventa"]
+                            TotalVentas += dicPVenta[Campo]
+                            lstTotalVS.append(TotalVentas)
                     mtzPVenta.append(dicPVenta.copy())
-                print(mtzPVenta)                   
+                print("Total Venta Anual = ",sum(lstTotalVS))
+                print(mtzPVenta)                              
 
             else:
                 print("El codigo de articulo no es valida...")

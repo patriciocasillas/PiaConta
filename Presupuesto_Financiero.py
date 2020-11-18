@@ -1,7 +1,9 @@
+import Packages
 ##Estado de Costo de Producción y Ventas
 def SCPS():
     print()
     input("presiona la tecla Enter para continuar")
+    
 ##Estado de Resultados
 def Statement_Income():
     print()

@@ -1,76 +1,77 @@
-mtzArticulos = []
-mtzPVenta = []
-lstValArticulo = []
-lstTotalVS = []
-dicArticulos = dict(CodArticulo="", NomArticulos= "")
-dicPVenta = dict(CodArticulo = "", UnAVender = 0, Pventa = 0, Semestre = 0, ImporteVenta = 0)
+import Packages
 
-dicArticulos["CodArticulo"] = "1"
-dicArticulos["NomArticulo"] = "CL"
-mtzArticulos.append(dicArticulos.copy())
-
-dicArticulos["CodArticulo"] = "2"
-dicArticulos["NomArticulo"] = "CE"
-mtzArticulos.append(dicArticulos.copy())
-
-dicArticulos["CodArticulo"] = "3"
-dicArticulos["NomArticulo"] = "CR"
-mtzArticulos.append(dicArticulos.copy())
-
+##Funciones
 ##Presupuesto de venta
 def Sales_Budget():
-    Opcion2 = ""
-    while(Opcion2 != "N"):
-        print()
+    Opcion2 = 1
+    while(Opcion2 != 0):
+        Packages.Clean()
         print("==PRESUPUESTO DE VENTA==")
         print("")
-        Opcion2 = input("¿Deseas agregar informacion de un producto (S/N): ")
-        if (Opcion2.upper() == "S"):
+        print("1.- Agregar información de un producto")
+        print("2.- Mostrar Reporte de presupuesto de venta")
+        print("\n0.- Regresar al Menú principal\n")
+        Opcion2 = int(input("Ingresa la opción a realizar: "))
+
+        if (str(Opcion2) == ""):
+            print("Por favor selecciona una opción")
+            input("presiona la tecla Enter para continuar")
+            Packages.Clean()
+        elif (Opcion2 == 1):
+            Packages.Clean()
             Opcion3 = 0
             print()
 
             print("Catalago de Articulos")
-            for Diccionario in mtzArticulos:
+            for Diccionario in Packages.mtzArticulos:
                 print(Diccionario["CodArticulo"] + ' - ' + Diccionario["NomArticulo"])
-                lstValArticulo.append(Diccionario["CodArticulo"])
+                Packages.lstValArticulo.append(Diccionario["CodArticulo"])
             Opcion3 = input("Ingrese el codigo del articulo a cargar: ")
 
-            if(Opcion3 in lstValArticulo):
+            if(Opcion3 in Packages.lstValArticulo):
                 for Cont in range(0, 2):
                     TotalVentas = 0
-                    for Campo in dicPVenta:
+                    for Campo in Packages.dicPVenta:
                         if (Campo == "CodArticulo"):
-                            dicPVenta[Campo] = Opcion3
+                            Packages.dicPVenta[Campo] = Opcion3
                         elif (Campo == "Semestre"):
-                            dicPVenta[Campo] = (Cont + 1)
+                            Packages.dicPVenta[Campo] = (Cont + 1)
                         elif (Campo == "UnAVender" or Campo == "Pventa"):
-                            dicPVenta[Campo] = float(input("Ingresa la cantidad de " + Campo + " para el " + str(Cont + 1)  + "° semestre: "))
+                            Packages.dicPVenta[Campo] = float(input("Ingresa la cantidad de " + Campo + " para el " + str(Cont + 1)  + "° semestre: "))
                         else:
-                            dicPVenta[Campo] = dicPVenta["UnAVender"] * dicPVenta["Pventa"]
-                            TotalVentas += dicPVenta[Campo]
-                            lstTotalVS.append(TotalVentas)
-                    mtzPVenta.append(dicPVenta.copy())
-                print("Total Venta Anual = ",sum(lstTotalVS))
-                print(mtzPVenta)                              
-
+                            Packages.dicPVenta[Campo] = Packages.dicPVenta["UnAVender"] * Packages.dicPVenta["Pventa"]
+                            TotalVentas += Packages.dicPVenta[Campo]
+                            Packages.lstTotalVS.append(TotalVentas)
+                    Packages.mtzPVenta.append(Packages.dicPVenta.copy())
+                    Packages.Clean()
             else:
-                print("El codigo de articulo no es valida...")
-                print()
+                print("ERROR: El codigo de articulo no es valido...")
+                input("Presiona ENTER para continuar")
+                Packages.Clean()
+        
+        elif (Opcion2 == 2):
+            Packages.Clean()
+            print("=Reporte Presupuesto de Venta=")
+            print()
+            for reporte in Packages.mtzPVenta:
+                print(reporte)
+            print("Total Venta Anual = ",sum(Packages.lstTotalVS))
+            input("Presiona ENTER para continuar")
 
-        elif (Opcion2.upper() == "N"):
-                    print()
-                    print("Regresando al menú principal...")
-                    print()
-                    Opcion2 = "N"
-
+        elif (Opcion2 == 0):
+            Packages.Clean()
+            print("Regresando al Menú principal...")
+            break
+        
         else:
-            print()
-            print("Opcion no valida...")
-            print()
+            print("ERROR: Opción no valida...")
+            input("Presiona ENTER para continuar")
+            Packages.Clean()
 
 ##Determinación del saldo de Clientes y Flujo de Entradas
 def DCBI():
     print()
+    print("== Determinación del saldo de Clientes y Flujo de Entradas ==")
 ##Presupuesto de Producción
 def Production_Budget():
     print()
